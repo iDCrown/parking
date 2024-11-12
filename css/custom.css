@@ -6,48 +6,48 @@
     width: 95%; /* Un poco más del 75% de col-lg-9 */
     padding: 0;
   }
-  }
+}
 
-  body{
-    font-family: "Arsenal", sans-serif;
-    overflow: hidden;
-  }
-  
-  .height-100{
-    height: 100vh;
-  }
-  h1, h2{
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  .style-type-none{
-    list-style-type: none;
-    padding: 0;
-  }
-  .icons-2 {
-    font-size: 30px;
-  }
-  .grid-gap-2{
-    grid-gap: 2em;
-  }
-  .bg-second{
-    background-color: #fbbf18;
-  }
-  .bg-gray{
-    background-color: rgb(246, 246, 246);
-  }
-  .width-51 {
-    width: 51px; 
-  }
-  .img{           /*quitar el . para dejar la clase global */  
-    height: 100%; 
-    width: 100%;
-  }
-  .img-welcome{
-    height: 8em;
-    margin: 0;
-  }
+body{
+  font-family: "Arsenal", sans-serif;
+  overflow: hidden;
+}
+
+.height-100{
+  height: 100vh;
+}
+h1, h2{
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.style-type-none{
+  list-style-type: none;
+  padding: 0;
+}
+.icons-2 {
+  font-size: 30px;
+}
+.grid-gap-2{
+  grid-gap: 2em;
+}
+.bg-second{
+  background-color: #fbbf18;
+}
+.bg-gray{
+  background-color: rgb(246, 246, 246);
+}
+.width-51 {
+  width: 51px; 
+}
+.img{           /*quitar el . para dejar la clase global */  
+  height: 100%; 
+  width: 100%;
+}
+.img-welcome{
+  height: 8em;
+  margin: 0;
+}
 
 .width-100{
   width: 100vw;

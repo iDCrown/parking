@@ -28,17 +28,17 @@
         <form class="d-flex flex-column align-items-center">        
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label"></label>
-            <input type="text" class="input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario" required>
+            <input type="text" class="input-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario" required>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label"></label>
-            <input type="password" class="input mb-3" id="exampleInputPassword1" placeholder="Contraseña" required>
+            <input type="password" class="input-login mb-3" id="exampleInputPassword1" placeholder="Contraseña" required>
           </div>
   <!--         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
           </div> -->
-          <button type="submit" class="btn mb-3">Log in</button>
+          <button type="submit" class="btn-login mb-3">Log in</button>
           <!-- <div id="emailHelp" class="form-text">¿Contraseña olvidada?</div> -->
         </form>
       </div>

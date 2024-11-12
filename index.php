@@ -139,7 +139,7 @@
           </div>
           <form class="form-access" action="">
             <h5>Ingresa la placa del vehiculo</h5>
-            <input class="nosubmit" type="search" placeholder="Buscar...">
+            <input class="nosubmit " type="search" placeholder="Buscar...">
             <button class="btn summit btn-warning btn-md">Registrar</button>
           </form>
         </div>
