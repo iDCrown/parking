@@ -1,55 +1,79 @@
-body {
-  background: rgb(13 162 253 / 16%);
+@media (min-width: 992px) {  
+  .col-lg-4 { 
+    width: 5%;
+  } 
+  .col-lg-6 { 
+    width: 32.5em;  
+    padding: 0;
+  } 
+
 }
-.containerv{
-  margin: 0 4em;
-}
-span{
-  position: absolute;
+
+.login{
   width: 100vw;
-  height: 92vh;
-  background: #21476ea1;
-  z-index: 1;
-}
-.container{
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
   align-items: center;
+  justify-content: center;
 }
-.caja {
-  background: #ffffff;
-  border: 3px solid #0dcaf0;
-  border-radius: 12px;
-  padding: 16px;
-  width: 93vw;
+
+.login_div{
+  width: 65em;
+  height: 85vh;
+  padding: 0 0 0 80px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: -5px 5px 25px 0px #5f5f5f;
+  background-color: #eeeeee;
 }
-h1{
-  margin-top: 3em;
-  color: cornflowerblue;
-  font-family: math;
-}
-p{
-  font-size: medium;
-  margin-bottom: 4em;
-}
-.btn{
-  background: cornflowerblue;
-  border: darkseagreen;
-  margin-bottom: 2em;
-}
-h2{
+
+.redes{
   display: flex;
   justify-content: center;
-  font-family: math;
-  color: plum;
 }
-.btn:first-child:active, :not(.btn-check)+.btn:active {
-  color: var(--bs-btn-active-color);
-  background-color: #dda0dd;
-  border-color: #dc3545;
+
+.input {
+  width: 22em;
+  display: flex;
+  border: none;
+  outline: none;
+  border-radius: 19px;
+  padding: 1.2em 0.9em;
+  background-color: #eeeeee;
+  box-shadow: 10px 10px 20px #dddddd, -10px -10px 20px #ffffff;
+  transition: 300ms ease-in-out;
+  cursor: pointer;
 }
-.btn:hover{
-  color: var(--bs-btn-active-color);
-  background-color: #dda0dd;
-  border-color: #dc3545;
+
+.input:hover {
+  box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
+}
+
+.input:focus {
+  box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
+}
+
+.h-login{
+  height: 100%;
+}
+
+.btn{
+  width: 10em;
+  padding: 0.9em;
+  border-radius: 13px;
+  background-color: #eeeeee;
+  box-shadow: 10px 10px 20px #dddddd, -10px -10px 20px #ffffff;
+}
+
+.btn:hover {
+  box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
+}
+
+.container-img{
+  height: 100%;
+}
+
+.container-img img{
+  width: 100%;
+  object-fit: contain;
+  height: 93%;
 }
