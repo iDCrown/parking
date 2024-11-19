@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Eliminar "views" de las URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+
+# Asegurarse de que el proyecto comience desde la carpeta raíz (opcional)
+DirectoryIndex index.php

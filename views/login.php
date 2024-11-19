@@ -6,8 +6,8 @@
     <title>Inicio de sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="./css/custom.css">
-    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./assets/css/custom.css">
+    <link rel="stylesheet" href="./assets/css/estilos.css">
 </head>
 <body>
 
@@ -45,7 +45,7 @@
 <!--IMAGEN REPRESENTATIVA-->
         <div class="col-lg-6 bg-warning h-login">
           <figure class="container-img">
-            <img src="./css/ImagenParking.png" alt="Imagen Parqueadero">
+            <img src="./assets/images/ImagenParking.png" alt="Imagen Parqueadero">
           </figure>
         </div>
       </div>
