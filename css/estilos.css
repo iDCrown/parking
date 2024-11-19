@@ -1,3 +1,12 @@
+@media (min-width: 992px) { /* Aplica solo en pantallas grandes */
+  .custom-col-1 {
+    width: 5%; /* Un poco menos del 8.33% de col-lg-1 */
+  }
+  .custom-col-9 {
+    width: 95%; /* Un poco más del 75% de col-lg-9 */
+    padding: 0;
+  }
+}
 @media (min-width: 992px) {  
   .col-lg-4 { 
     width: 5%;
@@ -6,14 +15,177 @@
     width: 32.5em;  
     padding: 0;
   } 
-
 }
+
+h5{
+  font-size: 16px;
+  text-align: center;
+}
+h1{
+  margin-bottom: 1.2em;
+  font-size: 46px;
+}  
+.panel{
+  width: 31em;
+  padding: 3em 0 0 0;
+  display: flex;
+  height: 91vh;
+  border-radius: 4em 0em 0 0em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .login{
   width: 100vw;
   height: 100vh;
   align-items: center;
   justify-content: center;
+}
+.button-icon{
+  width: 51px;
+}
+
+.container-info{
+  width: 82em;
+  height: 95vh;
+  padding: 0px 9em;
+  margin-top: 3em;
+}
+.alert {
+  margin: 0;
+  background: #c3930026;
+  border: 2px solid #ffc107;
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  height: 8em;
+}
+.cards-dashboard{
+  display: flex;
+  height: 14em;
+  padding: 0;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.table-visit{
+  height: 50%;
+  padding: 3.2em 0 0 0;
+}
+.table-content{
+  overflow-y: scroll;
+  height: 21em;
+}
+form {
+  color: #555;
+  display: flex;
+  padding: 2px;
+  border-radius: 22px;
+}
+
+input[type="search"] {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 7px 8px;
+  font-size: 14px;
+  color: inherit;
+  border: 1px solid transparent;
+  border-radius: inherit;
+}
+
+input.nosubmit {
+  border: 1px solid #555;
+  width: 100%;
+  padding: 6px 7px 6px 36px;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+}
+.container-filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 13px 0;
+}
+.button-filter{
+  background: #fcc106;
+  border: none;
+  padding: 2px 17px 2px 19px;
+  border-radius: 13px;
+}
+.button-filter:hover{
+  background: #ffcc26;
+}
+.dropdown-toggle:active{
+  background: #ffce2f;
+}
+.width-card{
+  width: 18em;
+}
+.card-title{
+  text-align: center;
+  font-size: 5em;
+  font-family: math;
+}
+.card-header{
+  background: #ffc107;
+  color: white;
+}
+.card-header.color{
+  background:#ffc107;
+  color: white;
+}
+.card-title.color{
+  color: #ffc107;
+}
+.card-title.coolor{
+  color: white;
+}
+.i-movil{
+  font-size: 20px;
+  margin-left: 12px;
+}
+.card.content{
+  max-width: 18rem;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 1px 3px 7px #dfdfdf;
+}
+.card-form{
+  width: 24em;
+  height: 18em;
+  margin-bottom: 77px;
+  border-radius: 2em;
+  overflow: hidden;
+  background-color: white;
+  border: none;
+}
+.card-header-form{
+  padding: 0.8em 2em;
+  display: flex;
+  justify-content: space-between;
+  background: #ffffff;
+  color: #ffcc00;
+  border-bottom: 1px solid #d2d2d2;
+  align-items: center;
+}
+.form-access{
+  display: flex;
+  padding: 34px 44px;
+  height: 82%;
+  grid-gap:24px;
+  border-radius: 22px;
+  flex-direction: column;
+  align-items: center;
+}
+.btn.summit{
+  border-radius: 17px;
+  width: 13em;
+}
+.title-panel{
+  margin-bottom: 37px;
+  font-size: 23px;
+  margin-top: 15px;
 }
 
 .login_div{
@@ -31,7 +203,7 @@
   justify-content: center;
 }
 
-.input {
+.input-login {
   width: 22em;
   display: flex;
   border: none;
@@ -44,11 +216,11 @@
   cursor: pointer;
 }
 
-.input:hover {
+.input-login:hover {
   box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
 }
 
-.input:focus {
+.input-login:focus {
   box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
 }
 
@@ -56,7 +228,7 @@
   height: 100%;
 }
 
-.btn{
+.btn-login{
   width: 10em;
   padding: 0.9em;
   border-radius: 13px;
@@ -64,7 +236,7 @@
   box-shadow: 10px 10px 20px #dddddd, -10px -10px 20px #ffffff;
 }
 
-.btn:hover {
+.btn-login:hover {
   box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
 }
 
