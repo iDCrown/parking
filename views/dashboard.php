@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (empty($_SESSION["id_usuario"])){
+  header("location: login");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,8 +133,12 @@
         </div>
       </div>
     </div>
+    
     <div class="panel position-absolute bottom-0 end-0 bg-second">
       <h2 class="title-panel"> Ingresos y Salidas</h2>
+      <div>
+      <a class="hover-primary"href="/parking/controllers/controller_logout.php">Salir</a>
+    </div>
       <div class="card-form width-card">
           <div class="card-header-form color">
             <span>Noviembre 10, 10:05pm</span>
@@ -155,7 +165,7 @@
           <form class="form-access" action="">
             <h5>Salida del vehiculo</h5>
             <input class="nosubmit" type="search" placeholder="Buscar...">
-            <button class="btn summit btn-warning btn-md">Registrar</button>
+            <button class="btn summit btn-warning btn-md" >Registrar</button>
           </form>
         </div>
       <div>

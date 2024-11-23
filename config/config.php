@@ -9,5 +9,7 @@ function redirect($path) {
 }
 
 // Inicia la sesión en todas las páginas
-session_start();
+/* if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+} */
 
