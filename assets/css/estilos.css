@@ -164,7 +164,7 @@ input.nosubmit {
   padding: 0.8em 2em;
   display: flex;
   justify-content: space-between;
-  background: #ffffff;
+  background:#f5f5ff;
   color: #ffcc00;
   border-bottom: 1px solid #d2d2d2;
   align-items: center;
@@ -177,6 +177,36 @@ input.nosubmit {
   border-radius: 22px;
   flex-direction: column;
   align-items: center;
+}
+.form-access.first{
+  display: flex;
+  padding: 22px 41px;
+  height: 84%;
+  grid-gap: 14px;
+  border-radius: 22px;
+  flex-direction: column;
+  align-items: center;
+}
+.btn.summit {
+  background-color: #e0e0e0;
+  border-radius: 50px;
+  background: #f9f9ff;
+  box-shadow: inset 7px 6px 5px #e4e4e4, inset -5px -4px 5px #ffffff, 2px 2px 4px #e3e3e3, -5px -4px 5px #ffffff;
+  color: #4d4d4d;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid rgb(255 255 255);
+}
+
+.btn.summit:hover {
+  box-shadow: inset 2px 2px 5px #dfad18, inset -2px -2px 5px #fff6d4, 2px 2px 5px #cfcdcd, -2px -2px 5px #e8e8e8;
+  background: #fcd152;
+  border: 2px solid rgb(255 202 0);}
+
+.btn.summit:focus {
+  box-shadow: inset 2px 2px 5px #dfad18, inset -2px -2px 5px #fff6d4, 2px 2px 5px #cfcdcd, -2px -2px 5px #e8e8e8;
+  background: #fcd152;
+  border: 2px solid rgb(255 202 0);
 }
 .btn.summit{
   border-radius: 17px;
@@ -248,4 +278,60 @@ input.nosubmit {
   width: 100%;
   object-fit: contain;
   height: 93%;
+}
+input[type="date"] {
+  border: none;
+  background: #f5f5ff;
+  color: #ffc107;
+  padding: 0 0 0 3px;
+  width: 7em;
+  border-radius: 6px;
+}
+.icon-btn{
+  border:none;
+  border-radius: 150px;
+  background: #f5f5ff;
+  box-shadow:  5px 5px 7px #e6e6f0,
+               -5px -5px 7px #ffffff;
+}
+.icon-btn:hover{
+  border-radius: 150px;
+  background: #f5f5ff;
+  box-shadow: inset 5px 5px 4px #e4e4ed,
+              inset -5px -5px 4px #ffffff;
+}
+.icon-btn:active{
+  border-radius: 150px;
+  background: #f5f5ff;
+  box-shadow: inset 5px 5px 4px #e4e4ed,
+              inset -5px -5px 4px #ffffff;
+}
+.i-btn{
+  font-size:20px;
+  color: #cbcbcb;
+}
+.icon-btn .i-btn:hover{
+  color: #ffc107;
+}
+.i-btn:active{
+  color: #ffc107;
+}
+.menu{
+  align-content: flex-end;
+}
+.perfile{
+  margin-bottom: 2em;
+  display: flex;
+  justify-content: center;
+}
+.btn-user{
+  text-align: center;
+  background: #fbbf19;
+  height: 40px;
+  width: 42px;
+  align-content: center;
+  border-radius: 50%;
+}
+.menu-user{
+
 }

@@ -40,6 +40,9 @@ h1, h2{
 .width-51 {
   width: 51px; 
 }
+.width-50{
+  height: 50vh;
+}
 .img{           /*quitar el . para dejar la clase global */  
   height: 100%; 
   width: 100%;

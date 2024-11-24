@@ -15,22 +15,35 @@
 <body>
 <div class="grid m-0">
   <div class="row height-100 m-0">
-    <div class="col-lg-1 custom-col-1">
-      <ul class="grid-gap-2 d-flex flex-column justify-content-center align-items-center style-type-none m-0 height-100">
-        <li class="width-51 d-flex justify-content-center button-icon">
-          <i class="bi bi-house-door icons-2"></i>
-        </li>
-        <li class="width-51 d-flex justify-content-center button-icon">
-          <i class="bi bi-person-plus icons-2"></i>
-        </li>
-        <li class="width-51 d-flex justify-content-center button-icon">
-          <i class="bi bi-journal-text icons-2"></i>
-        </li>
-      </ul>
+    <div class="col-lg-1 custom-col-1 menu">
+      <div class="width-50">
+        <ul class="grid-gap-2 d-flex flex-column justify-content-center align-items-center style-type-none m-0">
+          <li class="width-51 d-flex justify-content-center button-icon">
+            <i class="bi bi-house-door icons-2"></i>
+          </li>
+          <li class="width-51 d-flex justify-content-center button-icon">
+            <i class="bi bi-person-plus icons-2"></i>
+          </li>
+          <li class="width-51 d-flex justify-content-center button-icon">
+            <i class="bi bi-journal-text icons-2"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-item perfile dropdown">
+        <a class="nav-link btn-user" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+          <span>SM</span>
+        </a>
+        <ul class="dropdown-menu menu-user">
+          <li><a class="dropdown-item" href="#">Vigilante nuevo</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Salir</a></li>
+        </ul>
+      </div>
     </div>
     <div class="col-lg-9 custom-col-9 bg-gray">
       <div class="container-info">
         <h1>Dashboard</h1>
+
         <div class="alert alert-success" role="alert">
           <figure class="img-welcome">
             <img class="img" src="./assets/images/welcome.png" alt="Bienvenidos">
@@ -133,28 +146,39 @@
           <div class="card-header-form color">
             <span>Noviembre 10, 10:05pm</span>
             <div>
-              <i class="bi bi-bicycle i-movil"></i>
-              <i class="bi bi-car-front i-movil"></i>
+              <button class="icon-btn">
+                <i class="bi bi-bicycle i-btn"></i>
+              </button>
+              <button class="icon-btn">
+                <i class="bi bi-car-front i-btn"></i>
+              </button>
             </div>
           </div>
-          <form class="form-access" action="">
+          <form class="form-access first" action="">
             <h5>Ingresa la placa del vehiculo</h5>
-            <input class="nosubmit " type="search" placeholder="Buscar...">
+            <input class="nosubmit " type="search" placeholder="Placa...">
+            <input class="nosubmit " type="search" placeholder="Nombre...">
             <button class="btn summit btn-warning btn-md">Registrar</button>
           </form>
         </div>
       <div>
       <div class="card-form width-card">
           <div class="card-header-form color">
-            <span>Noviembre 10, 1:05pm</span>
+            <form action="">
+              <input type="date">
+            </form>
             <div>
-              <i class="bi bi-bicycle i-movil select"></i>
-              <i class="bi bi-car-front i-movil select"></i>
+              <button class="icon-btn">
+                <i class="bi bi-bicycle i-btn"></i>
+              </button>
+              <button class="icon-btn">
+                <i class="bi bi-car-front i-btn"></i>
+              </button>
             </div>
           </div>
           <form class="form-access" action="">
             <h5>Salida del vehiculo</h5>
-            <input class="nosubmit" type="search" placeholder="Buscar...">
+            <input class="nosubmit" type="search" placeholder="Placa...">
             <button class="btn summit btn-warning btn-md">Registrar</button>
           </form>
         </div>
