@@ -24,21 +24,24 @@
 <!--FORMULARIO-->
       <div class="col-lg-4 d-flex flex-column align-items-center " style="width: auto;">
         <h2>LOG IN</h2>
-        <!-- <span class="redes">Redes sociales</span> -->
-        <form class="d-flex flex-column align-items-center">        
+        <?php
+          include __DIR__ . '/../db/db.php';
+          include __DIR__ . '/../controllers/controller_login.php';
+        ?>
+        <form method="post" action="" class="d-flex flex-column align-items-center">        
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label"></label>
-            <input type="text" class="input-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario" required>
+            <input name="usuario" type="text" class="input-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label"></label>
-            <input type="password" class="input-login mb-3" id="exampleInputPassword1" placeholder="Contraseña" required>
+            <input name="password" type="password" class="input-login mb-3" id="exampleInputPassword1" placeholder="Contraseña">
           </div>
   <!--         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
           </div> -->
-          <button type="submit" class="btn-login mb-3">Log in</button>
+          <button name="btnIngreso" value="btnIngreso" type="submit" class="btn-login mb-3">Log in</button>
           <!-- <div id="emailHelp" class="form-text">¿Contraseña olvidada?</div> -->
         </form>
       </div>
