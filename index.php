@@ -18,8 +18,8 @@ switch ($route) {
     case 'dashboard':
         include('views/dashboard.php');
         break;
-    case 'clientes':
-        include('views/registroClientes.php');
+    case 'historial-usuarios':
+        include('views/historial-usuarios.php');
         break;
     case 'historial':
         mostrarHiatoria();
@@ -27,6 +27,9 @@ switch ($route) {
         break;
     case 'vigilantes':
         include('views/registroVigilantes.php');
+        break;
+    case 'añadirDueño':
+        include('views/formDuenos.php');
         break;
     default:
         echo "Página no encontrada";

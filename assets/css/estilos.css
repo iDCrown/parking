@@ -77,6 +77,7 @@ h1{
   overflow-y: scroll;
   height: 21em;
 }
+
 form {
   color: #555;
   display: flex;
@@ -340,4 +341,101 @@ input[type="date"] {
 }
 .table-history{
 
+}
+
+/* HISTORIAL DE USUARIOS */
+
+.users-sec{
+  padding: 4em 10em 17px 10em;
+}
+
+.btn-add{
+    margin-top: 44px;
+    width: 194px;
+    height: 66px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.bi-plus{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.container-users{
+    max-width:100%;
+    margin: 0;
+    margin-top: 70px;
+    font-size: 20px;
+    padding-right: 0;
+}
+
+.nav-link-text {
+  color: black !important; /* Cambia el texto a negro */
+}
+
+.nav-link-text:hover {
+  color: black; /* Mantén el texto negro */
+  border-color: #fbbf19 !important; /* Cambia el color de la línea de hover */
+}
+
+.search-container{
+    display: flex;
+    justify-content: end;
+}
+
+input.searching {
+  border: 1px solid #555;
+  width: 100%;
+  padding: 6px 7px 6px 36px;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+}
+
+.users-table{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.table-history{
+  margin-top: 38px;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.td{
+    padding: 20px 0 !important;
+}
+
+.container-pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* .container-pagination:hover{
+  background-color: #fbbf19 !important;
+} */
+
+/* FORMULARIO PARA DUEÑOS */
+.inputOwn{
+  width: 14em;
+  margin: 0 30px;
+}
+
+.input-car{
+  width: 32em;
+}
+
+.btn-own{
+  width: 10em;
+  padding: 0.9em;
+  border-radius: 40px;
+  background-color: #dfad18;
+  box-shadow: 10px 10px 20px #dddddd, -10px -10px 20px #ffffff;
+}
+
+.btn-own:hover{
+  background-color:#eeeeee;
 }

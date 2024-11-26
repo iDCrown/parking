@@ -6,7 +6,7 @@
         <a href="dashboard"><i class="bi bi-house-door icons-2"></i></a>
       </li>
       <li class="width-51 d-flex justify-content-center button-icon">
-        <i class="bi bi-person-plus icons-2"></i>
+        <a href="historial-usuarios"><i class="bi bi-person-plus icons-2"></i></a>
       </li>
       <li class="width-51 d-flex justify-content-center button-icon">
       <a href="historial"><i class="bi bi-journal-text icons-2"></i></a>

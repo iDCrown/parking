@@ -7,7 +7,6 @@ function redirect($path) {
     header('Location: ' . BASE_URL . $path);
     exit();
 }
-
 // Inicia la sesión en todas las páginas
 /* if (session_status() === PHP_SESSION_NONE) {
     session_start();
