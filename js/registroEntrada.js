@@ -2,13 +2,12 @@
 let tipoVehiculoSeleccionado = null;
 
 function seleccionarTipo(tipo){
-    tipoVehiculoSeleccionado = tipo
-    document.querySelector("#mensajeResultado").innerText = `Seleccionaste: ${tipo}`; // Muestra el tipo de vehículo seleccionado en la interfaz
+    tipoVehiculoSeleccionado = tipo;
+    document.querySelector("#mensajeResultado").innerText = `Seleccionaste: ${tipo}`; 
 }
 
-
 function registrarVehiculo(event) {
-    event.preventDefault(); // Evita la recarga de la página!!!!
+    event.preventDefault(); 
 
     const placa = document.querySelector("#inputPlaca").value.trim();
     const nombre = document.querySelector("#inputNombre").value.trim();
@@ -22,51 +21,58 @@ function registrarVehiculo(event) {
     const datos = {
         placa: placa,
         nombre: nombre,
-        tipoVehiculo: tipoVehiculoSeleccionado, // Se incluye el tipo seleccionado
+        tipoVehiculo: tipoVehiculoSeleccionado,
     };
 
+    console.log("Datos enviados:", datos); // Depuración: muestra los datos que se envían
+
     // Solicitud al servidor
-    fetch("db/db.php", {
+    fetch("controllers/controller_registroES.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(datos),
     })
-        .then((response) => {
-            // Verificar si la respuesta es exitosa (status 200)
-            if (!response.ok) {
-                throw new Error(`Error en la solicitud: ${response.statusText}`);
-            }
-            
-            // Leer la respuesta como texto primero para ver qué está devolviendo el servidor
-            return response.text(); 
-        })
-        .then((text) => {
-            console.log("Respuesta del servidor (texto crudo):", text); // Verifica qué estás recibiendo
-
-            // Intentar convertir el texto en JSON si tiene un formato válido
+    .then((response) => {
+        console.log("Respuesta raw:", response);
+        
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+            return response.text().then(text => {
+                console.error("Texto de respuesta de error:", text);
+                throw new Error(`Error: ${response.status} - ${text}`);
+            });
+        }
+        
+        // Intenta parsear como JSON, capturando errores
+        return response.text().then(text => {
+            console.log("Texto de respuesta completo:", text);
             try {
-                const data = JSON.parse(text); // Intentamos parsear el texto a JSON
-                
-                // Ahora podemos manejar la respuesta JSON
-                if (data.success) {
-                    document.querySelector("#mensajeResultado").innerText = "¡Registro exitoso!";
-                    // Limpia los campos del formulario
-                    document.querySelector("#formRegistro").reset();
-                    tipoVehiculoSeleccionado = null; // Reinicia la selección
-                } else {
-                    document.querySelector("#mensajeResultado").innerText =
-                        "Error al registrar: " + data.message;
-                }
+                return JSON.parse(text);
             } catch (error) {
-                document.querySelector("#mensajeResultado").innerText =
-                    "Error de formato de respuesta: " + error.message;
+                console.error("Error parseando JSON:", error);
+                console.error("Texto recibido:", text);
+                throw new Error("Respuesta no es JSON válido: " + text);
             }
-        })
-        .catch((error) => {
-            document.querySelector("#mensajeResultado").innerText =
-                "Error de conexión: " + error.message;
         });
-    
+    })
+    .then((data) => {
+        console.log("Datos recibidos:", data);
+        
+        // Resto de tu código de manejo de respuesta
+        if (data.success) {
+            document.querySelector("#mensajeResultado").innerText = "¡Registro exitoso!";
+            document.querySelector("#formRegistro").reset();
+            tipoVehiculoSeleccionado = null;
+        } else {
+            document.querySelector("#mensajeResultado").innerText = 
+                "Error al registrar: " + (data.message || 'Error desconocido');
+        }
+    })
+    .catch((error) => {
+        console.error("Error detallado:", error);
+        document.querySelector("#mensajeResultado").innerText = 
+            "Error de conexión: " + error.message;
+    });
 }
