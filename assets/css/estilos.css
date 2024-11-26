@@ -17,14 +17,7 @@
   } 
 }
 
-h5{
-  font-size: 16px;
-  text-align: center;
-}
-h1{
-  margin-bottom: 1.2em;
-  font-size: 46px;
-}  
+
 .panel{
   width: 31em;
   padding: 3em 0 0 0;
@@ -339,9 +332,6 @@ input[type="date"] {
   height: 100vh;
   padding: 4em 10em 17px 10em;
 }
-.table-history{
-
-}
 
 /* HISTORIAL DE USUARIOS */
 
@@ -350,11 +340,13 @@ input[type="date"] {
 }
 
 .btn-add{
-    margin-top: 44px;
-    width: 194px;
-    height: 66px;
-    font-size: 20px;
-    font-weight: 600;
+  margin-top: 44px;
+  width: 192px;
+  font-size: 16px;
+  border-radius: 34px;
+  font-weight: 600;
+  padding: 1px;
+  height: 38px;
 }
 
 .bi-plus{
@@ -363,11 +355,10 @@ input[type="date"] {
 }
 
 .container-users{
-    max-width:100%;
-    margin: 0;
-    margin-top: 70px;
-    font-size: 20px;
-    padding-right: 0;
+  max-width:100%;
+  margin: 0;
+  margin-top: 70px;
+  padding-right: 0;
 }
 
 .nav-link-text {
@@ -376,19 +367,17 @@ input[type="date"] {
 
 .nav-link-text:hover {
   color: black; /* Mantén el texto negro */
-  border-color: #fbbf19 !important; /* Cambia el color de la línea de hover */
+  border-bottom-color: #ffbb00 !important;
 }
-
-.search-container{
-    display: flex;
-    justify-content: end;
+.nav-underline{
+  border-bottom-color: #ffbb00 !important;
 }
-
-input.searching {
-  border: 1px solid #555;
-  width: 100%;
-  padding: 6px 7px 6px 36px;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+.nav-underline:hover{
+  border-bottom-color: #ffbb00 !important;
+}
+.nav-link-text:focus {
+  color: black; /* Mantén el texto negro */
+  border-color: #ffbb00 !important; /* Cambia el color de la línea de hover */
 }
 
 .users-table{
@@ -398,20 +387,20 @@ input.searching {
 }
 
 .table-history{
-  margin-top: 38px;
+  margin-top: 25px;
   text-align: center;
   overflow: hidden;
   border-radius: 15px;
 }
 
-.td{
-    padding: 20px 0 !important;
+td{
+  padding: 16px 0 !important;
 }
 
 .container-pagination{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 /* .container-pagination:hover{

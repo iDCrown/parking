@@ -2,7 +2,6 @@
   <form class="nosubmit">
   <input class="nosubmit" type="search" placeholder="Buscar...">
   </form>
-  
   <button class="btn btn-warning btn-sm dropdown-toggle button-filter" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar</button>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Action</a></li>

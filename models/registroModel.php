@@ -13,8 +13,9 @@ $tipoVehiculo = $data['tipoVehiculo']; // Si ya lo estás recibiendo en el JSON
 
 // Si el tipoVehiculo no se recibe en el JSON, lo obtenemos de la base de datos
 $id_espacio = asignarEspacio($db, $tipoVehiculo);
+
 if (!$tipoVehiculo) {
-    $tipoVehiculo = obtenerTipoVehiculo($db, $id_espacio); // Asegúrate de definir correctamente $id_espacio
+    $tipoVehiculo = obtenerTipoEspacio($db, $id_espacio); // Asegúrate de definir correctamente $id_espacio
 }
 
 function registrarEntrada($db, $nombre, $placa){
@@ -120,8 +121,9 @@ function obtenerTipoEspacio($db, $id_espacio){
 }
   
   //SALIDA
-
-function registrarSalida($db, $placa){
+  
+  function registrarSalida($db, $placa){
+  echo "salio";
   $horaSalida = date('Y-m-d H:i:s');
   $query_update = "UPDATE registroacceso ra
   INNER JOIN Dueno_vehiculos dv ON ra.id_duenos_vehiculos = dv.id_duenos_vehiculos
