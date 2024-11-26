@@ -332,6 +332,12 @@ input[type="date"] {
   align-content: center;
   border-radius: 50%;
 }
-.menu-user{
+
+/* HISTORY */
+.history{
+  height: 100vh;
+  padding: 4em 10em 17px 10em;
+}
+.table-history{
 
 }

@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+//
+require_once 'controllers/controller_historial.php';
+
 // Incluir el archivo de configuración
 include('./config/config.php');
 
@@ -17,6 +22,7 @@ switch ($route) {
         include('views/registroClientes.php');
         break;
     case 'historial':
+        mostrarHiatoria();
         include('views/historial.php');
         break;
     case 'vigilantes':

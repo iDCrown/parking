@@ -25,8 +25,8 @@
       <div class="col-lg-4 d-flex flex-column align-items-center " style="width: auto;">
         <h2>LOG IN</h2>
         <?php
-          include __DIR__ . '/../db/db.php';
-          include __DIR__ . '/../controllers/controller_login.php';
+          require_once __DIR__ . '/../db/db.php';
+          require_once __DIR__ . '/../controllers/controller_login.php';
         ?>
         <form method="post" action="" class="d-flex flex-column align-items-center">        
           <div class="mb-3">

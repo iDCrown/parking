@@ -5,34 +5,9 @@ if (empty($_SESSION["id_usuario"])){
 }
 ?>
 <?php include 'components/header.php'; ?>
-<body>
   <div class="grid m-0">
     <div class="row height-100 m-0">
-      <div class="col-lg-1 custom-col-1 menu">
-        <div class="width-50">
-          <ul class="grid-gap-2 d-flex flex-column justify-content-center align-items-center style-type-none m-0">
-            <li class="width-51 d-flex justify-content-center button-icon">
-              <i class="bi bi-house-door icons-2"></i>
-            </li>
-            <li class="width-51 d-flex justify-content-center button-icon">
-              <i class="bi bi-person-plus icons-2"></i>
-            </li>
-            <li class="width-51 d-flex justify-content-center button-icon">
-              <i class="bi bi-journal-text icons-2"></i>
-            </li>
-          </ul>
-        </div>
-        <div class="nav-item perfile dropdown">
-          <a class="nav-link btn-user" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-            <span>SM</span>
-          </a>
-          <ul class="dropdown-menu menu-user">
-            <li><a class="dropdown-item" href="#">Vigilante nuevo</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item hover-primary"href="/parking/controllers/controller_logout.php">Salir</a></li>
-          </ul>
-        </div>
-      </div>
+	    <?php include 'components/menu.php'; ?>
       <div class="col-lg-9 custom-col-9 bg-gray">
         <div class="container-info">
           <h1>Dashboard</h1>
@@ -64,17 +39,7 @@ if (empty($_SESSION["id_usuario"])){
             </div>
           </div>
           <div class="table-visit">
-            <div class="container-filter">
-              <form class="nosubmit">
-                <input class="nosubmit" type="search" placeholder="Buscar...">
-              </form>
-              <button class="btn btn-warning btn-sm dropdown-toggle button-filter" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar</button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
+            <?php include 'components/filter.php' ?>
             <div class="table-content">
               <table class="table">
                 <thead>
@@ -136,24 +101,26 @@ if (empty($_SESSION["id_usuario"])){
       
       <div class="panel position-absolute bottom-0 end-0 bg-second">
         <h2 class="title-panel"> Ingresos y Salidas</h2>
+        <div id="mensajeResultado"></div>
         <div>
       </div>
         <div class="card-form width-card">
+    
             <div class="card-header-form color">
               <span>Noviembre 10, 10:05pm</span>
               <div>
-                <button class="icon-btn">
+                <button onclick="seleccionarTipo('Moto')" class="icon-btn">
                   <i class="bi bi-bicycle i-btn"></i>
                 </button>
-                <button class="icon-btn">
+                <button onclick="seleccionarTipo('Auto')" class="icon-btn">
                   <i class="bi bi-car-front i-btn"></i>
                 </button>
               </div>
             </div>
-            <form class="form-access first" action="">
+            <form class="form-access first" id="formRegistro" onsubmit="registrarVehiculo(event)" >
               <h5>Ingresa la placa del vehiculo</h5>
-              <input class="nosubmit " type="search" placeholder="Placa...">
-              <input class="nosubmit " type="search" placeholder="Nombre...">
+              <input id="inputPlaca" class="nosubmit " type="search" placeholder="Placa...">
+              <input id="inputNombre" class="nosubmit " type="search" placeholder="Nombre...">
               <button class="btn summit btn-warning btn-md">Registrar</button>
             </form>
           </div>
@@ -184,5 +151,6 @@ if (empty($_SESSION["id_usuario"])){
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+  <script src="js/registroEntrada.js"></script>
+  </body>
 </html>
