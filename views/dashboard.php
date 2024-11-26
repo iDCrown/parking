@@ -4,7 +4,7 @@ if (empty($_SESSION["id_usuario"])){
   header("location: login");
 }
 ?>
-<?php include 'components/header.php'; ?>
+<?php include 'components/header.php';?>
 <body>
   <div class="grid m-0">
     <div class="row height-100 m-0">
@@ -15,7 +15,7 @@ if (empty($_SESSION["id_usuario"])){
               <i class="bi bi-house-door icons-2"></i>
             </li>
             <li class="width-51 d-flex justify-content-center button-icon">
-              <i class="bi bi-person-plus icons-2"></i>
+              <a href="historial-usuarios" ><i class="bi bi-person-plus icons-2"></i></a>
             </li>
             <li class="width-51 d-flex justify-content-center button-icon">
               <i class="bi bi-journal-text icons-2"></i>
@@ -181,6 +181,7 @@ if (empty($_SESSION["id_usuario"])){
         <div>
         </div>
       </div>
+    </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

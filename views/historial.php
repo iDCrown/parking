@@ -1,5 +1,5 @@
 <?php include 'components/header.php'; ?>
 <body>
-   history
+   <h1>Historia</h1>
 </body>
 </html>

@@ -13,7 +13,7 @@
 
 <!--LOGIN-->
 <div class="container-fluid m-0">
-  <div class="row align-items-center width-100 ">
+  <div class="row align-items-center width-100">
     <div class="col-6 bg-warning height-100">
     </div>
     <div class="col-6 bg-white height-100">
