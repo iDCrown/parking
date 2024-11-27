@@ -1,4 +1,5 @@
 <?php
+
 // Limpiar cualquier salida previa
 ob_start(); 
 
@@ -33,5 +34,6 @@ ob_end_clean();
 
 // Enviar respuesta JSON
 echo json_encode($resultado);
+
 exit;
 ?>

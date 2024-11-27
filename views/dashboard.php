@@ -39,61 +39,32 @@ if (empty($_SESSION["id_usuario"])){
             </div>
           </div>
           <div class="table-visit">
-            <?php include 'components/filter.php' ?>
+            <?php include 'components/filter.php'?>
             <div class="table-content">
-              <table class="table">
-                <thead>
+            <table class=" table table-light table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">N. Espacio</th>
+                  <th scope="col">Vehiculo</th>
+                  <th scope="col">Nombre del Dueño</th>
+                  <th scope="col">Placa</th> 
+                  <th scope="col">Entrada</th>
+                  <th scope="col">Salida</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($historial as $registro):?> 
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <td><?= htmlspecialchars($registro['numero_espacio']); ?></td>
+                    <td><?= htmlspecialchars($registro['tipo_espacio']); ?></td>
+                    <td><?= htmlspecialchars($registro['nombre'] . ' ' . $registro['apellido']); ?></td>
+                    <td><?= htmlspecialchars($registro['placa']); ?></td>
+                    <td><?= htmlspecialchars($registro['horaEntrada']); ?></td>
+                    <td><?= htmlspecialchars($registro['horaSalida'] ?? null); ?></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
             </div>
           </div>
         </div>
