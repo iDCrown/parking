@@ -49,7 +49,6 @@ if (empty($_SESSION["id_usuario"])){
                   <th scope="col">Nombre del Dueño</th>
                   <th scope="col">Placa</th> 
                   <th scope="col">Entrada</th>
-                  <th scope="col">Salida</th>
                 </tr>
               </thead>
               <tbody>
@@ -59,8 +58,7 @@ if (empty($_SESSION["id_usuario"])){
                     <td><?= htmlspecialchars($registro['tipo_espacio']); ?></td>
                     <td><?= htmlspecialchars($registro['nombre'] . ' ' . $registro['apellido']); ?></td>
                     <td><?= htmlspecialchars($registro['placa']); ?></td>
-                    <td><?= htmlspecialchars($registro['horaEntrada']); ?></td>
-                    <td><?= htmlspecialchars($registro['horaSalida'] ?? null); ?></td>
+                    <td><?= htmlspecialchars($registro['horaEntrada']); ?></td> 
                   </tr>
                 <?php endforeach; ?>
               </tbody>
