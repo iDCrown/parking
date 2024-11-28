@@ -1,54 +1,65 @@
 <?php
+// Habilitar errores para depuración
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-var_dump($data);
-// Incluye la conexión a la base de datos y funciones
-require_once 'db.php'; // Archivo con la conexión a la base de datos
-require_once 'models/historialUsuarioModel.php'; // Archivo con las funciones del modelo
 
-// Verifica que la solicitud sea POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtén el cuerpo de la solicitud (en formato JSON)
-    $data = json_decode(file_get_contents('php://input'), true);
+require_once '../db/db.php';
+require_once '../models/historialUsuarioModel.php';
 
-    // Verifica si se recibió el parámetro 'tipoUsuario'
-    if (isset($data['tipoUsuario'])) {
-        $tipo_usuario = $data['tipoUsuario'];
+// Asegurarse de que no haya espacios en blanco antes de la salida
+header("Content-Type: application/json; charset=UTF-8");
 
-        try {
-            // Llama a la función 'mostrarHistorialUsuario' con el tipo de usuario
-            $result = mostrarHistorialUsuario($db, $tipo_usuario);
+// Recibir datos JSON
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
 
-            // Inicializa el array de registros
-            $registros = [];
+// Validar datos recibidos
+if (!$data || !isset($data['tipoUsuario'])) {
+    http_response_code(400); // Bad Request
+    echo json_encode(['error' => 'Datos inválidos o faltantes']);
+    exit;
+}
 
-            // Verifica si se obtuvieron resultados de la base de datos
-            if ($result && $result->num_rows > 0) {
-                // Recorrer los resultados y almacenarlos en el array $registros
-                while ($row = $result->fetch_assoc()) {
-                    $registros[] = $row;
-                }
-            }
+// Obtener conexión a la base de datos
+$db = conexionDB();
+if (!$db) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Fallo en la conexión a la base de datos']);
+    exit;
+}
 
-            // Envía los resultados al cliente en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($registros);
+error_log(print_r($data, true));
 
-        } catch (Exception $e) {
-            // Maneja errores y envía una respuesta con el mensaje de error
-            header('Content-Type: application/json', true, 500);
-            echo json_encode(['error' => $e->getMessage()]);
-        }
-
+try {
+    // Validar tipo de usuario y obtener resultados
+    if ($data['tipoUsuario'] === 'dueno') {
+        $resultado = fetchAll(mostrarDueno($db));
     } else {
-        // Devuelve un error si 'tipoUsuario' no está presente
-        header('Content-Type: application/json', true, 400);
-        echo json_encode(['error' => 'Falta el parámetro tipoUsuario.']);
+        $resultado = fetchAll(mostrarUsuario($db, $data['tipoUsuario']));
     }
 
-} else {
-    // Devuelve un error si el método HTTP no es POST
-    header('Content-Type: application/json', true, 405);
-    echo json_encode(['error' => 'Método no permitido.']);
+    // Responder con un JSON válido
+    http_response_code(200);
+    echo json_encode($resultado);
+
+} catch (Exception $e) {
+    // Capturar y devolver cualquier error
+    http_response_code(500);
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    exit;
 }
+
+// Función auxiliar para convertir resultados a arrays
+
+function fetchAll($result) { 
+    $rows = []; 
+    if (!$result) {
+         throw new Exception("No se obtuvieron resultados de la consulta."); 
+    }
+    while ($row = $result->fetch_assoc()) {
+         $rows[] = $row; 
+        } 
+    return $rows; 
+}
+?>

@@ -1,43 +1,110 @@
-let tipo_de_usuario = null;
+document.addEventListener('DOMContentLoaded', function() {
+     selectTab('dueno'); 
+     
+     const tabs = document.querySelectorAll(".tab");
+     tabs.forEach(tab =>{
+         tab.addEventListener('click', function(){
+             tabs.forEach(t => 
+             t.classList.remove('active-tab'));
+             tab.classList.add('active-tab');
+            })
+        })
+    });
+    
+    function actualizasEncabezado(tipoUsuario){
+        const thead = document.querySelector('#tabla-head');       
+        thead.innerHTML = "";
 
-function selectTab(tipo_usuario) {
-    tipo_de_usuario = tipo_usuario;
-    document.querySelector("#mensajeResultado").innerText = `Seleccionaste: ${tipo_de_usuario}`; // Muestra el tipo de usuario seleccionado en la interfaz
+        const filaHead = document.createElement('tr');
+        const headDueno = ['Nombre', 'Apellido', 'Cédula', 'Correo', 'Rol'];
+        const headUsuario = ['Nombre', 'Apellido', 'Cédula', 'Celular', 'Correo'];
+        
+        let encabezado;
+        if(tipoUsuario === 'dueno'){
+            encabezado = headDueno;
+        }else {
+            encabezado = headUsuario;
+        }
+
+        encabezado.forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            filaHead.appendChild(th);  
+        })
+        thead.appendChild(filaHead);
+    }
+    
+
+    function selectTab(tipo_usuario) {
+        
+    actualizasEncabezado(tipo_usuario)
+    mostrarSinner(true);
 
     // Realiza la llamada a la API
-    fetch("controller/controller_historialUsuario.php", {
+    fetch("controllers/controller_historialUsuario.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ tipoUsuario: tipo_usuario }),
     })
-
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            console.error("Error en la respuesta:", data.error);
-            alert(data.error);
-            return;
-        }
-        actualizarTabla(data);
-    })
-    .catch(error => console.error("Error en la solicitud:", error));
+        .then(response => {
+            return response.text(); 
+        })
+        .then(text => {
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (error) {
+                console.error("Error al parsear JSON:", error, "Texto recibido:", text);
+                return;
+            }
+            if (data && Array.isArray(data)) {
+                actualizarTabla(data); // Actualiza la tabla con los datos recibidos
+            } else {
+                console.error("Formato de datos inesperado:", data);
+            }
+        })
+        .catch(error => console.error("Error en la solicitud:", error))
+        .finally(() => mostrarSinner(false));
 }
 
+
 function actualizarTabla(datos) {
-    const tbody = document.querySelector("#tabla-body"); // Asegúrate de que este ID corresponda a tu tabla
-    tbody.innerHTML = ""; // Limpia la tabla antes de actualizarla
-    
+
+    const tbody = document.querySelector("#tabla-body");
+    tbody.innerHTML = ""; // Limpia el contenido existente
+
+    if (datos.length === 0) {
+        // Muestra un mensaje si no hay datos
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.textContent = "No hay datos disponibles";
+        cell.colSpan = 5; // Ajusta al número de columnas de tu tabla
+        row.appendChild(cell);
+        tbody.appendChild(row);
+        return;
+    }
+
     datos.forEach(registro => {
         const row = document.createElement("tr");
-        
-        Object.values(registro).forEach(valor => {
+
+        Object.keys(registro).forEach(clave => {
             const cell = document.createElement("td");
-            cell.textContent = valor ? valor : "N/A"; // Evita celdas vacías
+            row.classList.add('fila');
+            cell.textContent = registro[clave] || "N/A"; // Usa "N/A" para valores vacíos
             row.appendChild(cell);
         });
-        
+
         tbody.appendChild(row);
     });
+}
+
+function mostrarSinner(mostrar){
+    const loader = document.querySelector("#loader");
+    if (mostrar){
+        loader.style.display = "block";
+    }else {
+        loader.style.display = "none";
+    }
 }

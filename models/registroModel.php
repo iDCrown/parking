@@ -1,26 +1,15 @@
 <?php 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-// Incluye la conexión a la base de datos si no lo has hecho antes
-require_once 'db.php';
+error_reporting(E_ALL); 
 
-$data = json_decode(file_get_contents('php://input'), true); // Recibe los datos en formato JSON
+require_once '../db/db.php';
 
-$placa = $data['placa'];
-$nombre = $data['nombre'];
-$tipoVehiculo = $data['tipoVehiculo']; // Si ya lo estás recibiendo en el JSON
-
-// Si el tipoVehiculo no se recibe en el JSON, lo obtenemos de la base de datos
-$id_espacio = asignarEspacio($db, $tipoVehiculo);
-
-if (!$tipoVehiculo) {
-    $tipoVehiculo = obtenerTipoEspacio($db, $id_espacio); // Asegúrate de definir correctamente $id_espacio
-}
-
-function registrarEntrada($db, $nombre, $placa){
+// Modificamos la función para que maneje más casos
+function registrarEntrada($db, $nombre, $placa, $tipoVehiculo){
+  // Primero, verificamos si el vehículo y el dueño existen
   $query_verificacionEntrada = "SELECT
-  dv.id_duenos_vehiculos
+  dv.id_duenos_vehiculos, d.id_dueno, v.id_vehiculo
   FROM Dueno_vehiculos dv
   INNER JOIN vehiculo v ON dv.id_vehiculo = v.id_vehiculo
   INNER JOIN Duenos d ON dv.id_dueno = d.id_dueno
@@ -28,44 +17,57 @@ function registrarEntrada($db, $nombre, $placa){
 
   $stmt_verificacion = $db->prepare($query_verificacionEntrada);
   if($stmt_verificacion === false) {
-    // Si la preparación falla, muestra el error
-    throw new Exception('Error en la preparación de la consulta: ' . $db->error);
+    error_log('Error en la preparación de la consulta: ' . $db->error);
+    return ['success' => false, 'message' => 'Error en la consulta inicial'];
   }
+  
   $stmt_verificacion->bind_param("ss", $placa, $nombre);
   $stmt_verificacion->execute();
   $result = $stmt_verificacion->get_result();
 
-
-// INSERTAR ENTRADA
-
+  // Si el vehículo y dueño existen
   if($result->num_rows > 0){
     $row = $result->fetch_assoc();
     $id_duenos_vehiculos = $row['id_duenos_vehiculos'];
 
-      if($id_espacio){
-        $horaEntrada = date('Y-m-d H:i:s');
-        $query_insert = "INSERT INTO registroacceso (horaEntrada, id_duenos_vehiculos, id_espacio) 
-        VALUES (?,?,?)";
+    // Buscamos un espacio disponible
+    $id_espacio = asignarEspacio($db, $tipoVehiculo);
+    
+    if($id_espacio){
+      $horaEntrada = date('Y-m-d H:i:s');
+      
+      // Insertamos el registro de entrada
+      $query_insert = "INSERT INTO registroacceso (horaEntrada, id_duenos_vehiculos, id_espacio) 
+      VALUES (?,?,?)";
 
-        $stmt_entrada = $db->prepare($query_insert);
-        if ($stmt_entrada === false) {
-            throw new Exception('Error en la preparación de la consulta de entrada: ' . $db->error);
-        }
+      $stmt_entrada = $db->prepare($query_insert);
+      if ($stmt_entrada === false) {
+          error_log('Error en la preparación de la consulta de entrada: ' . $db->error);
+          return ['success' => false, 'message' => 'Error al preparar inserción de entrada'];
+      }
 
-        $stmt_entrada->bind_param("sii", $horaEntrada, $id_duenos_vehiculos, $id_espacio);
-        if ($stmt_entrada->execute()) {
-          $query_update_estado = "UPDATE espacioparqueadero SET estado = 'Ocupado' WHERE id_espacio = ?";
-          $stmt_update = $db->prepare($query_update_estado);
-            if ($stmt_update === false) {
-                throw new Exception('Error al actualizar el estado del espacio: ' . $db->error);
-            }
-            $stmt_update->bind_param("i", $id_espacio);
-            $stmt_update->execute();
-            return true; // Registro exitoso
+      $stmt_entrada->bind_param("sii", $horaEntrada, $id_duenos_vehiculos, $id_espacio);
+      if ($stmt_entrada->execute()) {
+        // Actualizamos el estado del espacio
+        $query_update_estado = "UPDATE espacioparqueadero SET estado = 'Ocupado' WHERE id_espacio = ?";
+        $stmt_update = $db->prepare($query_update_estado);
+        if ($stmt_update === false) {
+            error_log('Error al preparar actualización de estado: ' . $db->error);
+            return ['success' => false, 'message' => 'Error al actualizar estado de espacio'];
         }
+        $stmt_update->bind_param("i", $id_espacio);
+        $stmt_update->execute();
+        
+        return ['success' => true, 'message' => 'Entrada registrada correctamente', 'id_espacio' => $id_espacio];
+      }
+    } else {
+      return ['success' => false, 'message' => 'No hay espacios disponibles para este tipo de vehículo'];
     }
+  } else {
+    return ['success' => false, 'message' => 'Vehículo o dueño no registrado'];
   }
-  return false;
+  
+  return ['success' => false, 'message' => 'Error desconocido'];
 }
 
 
@@ -140,5 +142,7 @@ function obtenerTipoEspacio($db, $id_espacio){
   return $stmt->affected_rows > 0;  // Retorna true si se actualizó correctamente
 
 }
-
+// Al final del archivo registroModel.php
+header('Content-Type: application/json');  // Asegura que la respuesta sea JSON
+echo json_encode(['success' => true]);  // Enviar una respuesta exitosa
 ?>

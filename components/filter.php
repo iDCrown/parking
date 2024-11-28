@@ -1,6 +1,6 @@
 <div class="container-filter">
   <form class="nosubmit">
-  <input class="nosubmit" type="search" placeholder="Buscar...">
+  <input id="buscador" class="nosubmit" type="search" placeholder="Buscar...">
   </form>
   <button class="btn btn-warning btn-sm dropdown-toggle button-filter" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar</button>
   <ul class="dropdown-menu">

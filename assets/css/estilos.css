@@ -17,7 +17,6 @@
   } 
 }
 
-
 .panel{
   width: 31em;
   padding: 3em 0 0 0;
@@ -28,7 +27,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .login{
   width: 100vw;
@@ -227,6 +225,26 @@ input.nosubmit {
   justify-content: center;
 }
 
+.input-form {
+  width: 22em;
+  display: flex;
+  border: none;
+  outline: none;
+  border-radius: 19px;
+  padding: .7em 0.9em;
+  background-color: #eeeeee;
+  box-shadow: 10px 10px 20px #dddddd, -10px -10px 20px #ffffff;
+  transition: 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.input-form:hover{
+  box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
+}
+.input-form:focus{
+  box-shadow: -7px -7px 8px #dddddd,7px 7px 8px #ffffff;
+}
+
 .input-login {
   width: 22em;
   display: flex;
@@ -409,19 +427,19 @@ td{
 
 /* FORMULARIO PARA DUEÑOS */
 .inputOwn{
-  width: 14em;
+  width: 15em;
   margin: 0 30px;
 }
 
 .input-car{
-  width: 32em;
+  width: 34em;
 }
 
 .btn-own{
   width: 10em;
   padding: 0.9em;
   border-radius: 40px;
-  background-color: #dfad18;
+  background-color: #ffc107;
   box-shadow: 10px 10px 20px #dddddd, -10px -10px 20px #ffffff;
 }
 

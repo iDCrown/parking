@@ -1,18 +1,8 @@
 <?php
-function conectarDB() {
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $db = "parqueaderoetitc";
-    $conexion = new mysqli($host, $user, $pass, $db);
-    if ($conexion->connect_error) {
-        die("Error de conexión: " . $conexion->connect_error);
-    }
-    return $conexion;
-}
+require_once 'db.php';
 
 function insertarDueno($nombre, $apellido, $cedula, $rol_dueno) {
-    $conexion = conectarDB();
+    $conexion = conexionDB();
     $sql = "INSERT INTO duenos (nombre, apellido, cedula, Rol_dueno) VALUES (?, ?, ?, ?)";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ssss", $nombre, $apellido, $cedula, $rol_dueno);
@@ -24,7 +14,7 @@ function insertarDueno($nombre, $apellido, $cedula, $rol_dueno) {
 }
 
 function insertarVehiculo($tipo, $placa) {
-    $conexion = conectarDB();
+    $conexion = conexionDB();
     $sql = "INSERT INTO vehiculo (tipo, placa) VALUES (?, ?)";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $tipo, $placa);
@@ -36,7 +26,7 @@ function insertarVehiculo($tipo, $placa) {
 }
 
 function relacionarDuenoVehiculo($id_dueno, $id_vehiculo) {
-    $conexion = conectarDB();
+    $conexion = conexionDB();
     $sql = "INSERT INTO dueno_vehiculos (id_dueno, id_vehiculo) VALUES (?, ?)";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ii", $id_dueno, $id_vehiculo);
