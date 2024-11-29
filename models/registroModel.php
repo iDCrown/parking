@@ -120,6 +120,7 @@ function obtenerTipoEspacio($db, $id_espacio){
 
     return null;  // Si no hay espacios disponibles para ese tipo de vehículo
 }
+
   
   //SALIDA
 

@@ -70,6 +70,51 @@ function escapeHtml(str) {
     });
 }
 
+// Función para actualizar tarjetas de espacios
+function actualizarTarjetasEspacios() {
+    fetch('controllers/controller_espacioVivo.php?action=getSpaces')
+    .then(response => response.json())
+    .then(data => {
+        console.log('Datos recibidos:', data);
+
+        const tarjetas = Array.from(document.querySelectorAll('.card'));
+
+        tarjetas.forEach(tarjeta => {
+            const cardHeader = tarjeta.querySelector('.card-header');
+            const cardTitle = tarjeta.querySelector('.card-title');
+
+            // Actualizar solo tarjetas de Auto y Moto
+            if (cardHeader && cardHeader.textContent.includes("Espacios disponibles") && cardHeader.querySelector('i.bi-car-front')) {
+                const espacioAuto = data.espacios_auto || '--';
+                cardTitle.textContent = espacioAuto === '--' ? '--' : espacioAuto.toString().padStart(2, '0');
+            }
+
+            if (cardHeader && cardHeader.textContent.includes("Espacios disponibles") && cardHeader.querySelector('i.bi-bicycle')) {
+                const espacioMoto = data.espacios_moto || '--';
+                cardTitle.textContent = espacioMoto === '--' ? '--' : espacioMoto.toString().padStart(2, '0');
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error al actualizar las tarjetas:', error);
+    });
+}
+// Función para actualizar tarjeta de asignados
+function actualizarTarjetaAsignados(espacioAsignado) {
+    const tarjetaAsignados = document.querySelector('.card-title.coolor');
+    if (tarjetaAsignados) {
+        tarjetaAsignados.textContent = espacioAsignado ? espacioAsignado.toString().padStart(2, '0') : 'N/A';
+    }
+}
+
+// Función para reiniciar la tarjeta asignado a '--'
+function reiniciarTarjetaAsignados() {
+    const tarjetaAsignados = document.querySelector('.card-title.coolor');
+    if (tarjetaAsignados) {
+        tarjetaAsignados.textContent = '--';
+    }
+}
+
 
 function registrarVehiculo(event) {
     event.preventDefault(); 
@@ -130,6 +175,16 @@ function registrarVehiculo(event) {
             document.querySelector("#mensajeResultado").innerText = "¡Registro exitoso!";
             document.querySelector("#formRegistro").reset();
             tipoVehiculoSeleccionado = null;
+
+            const espacioAsignado = data.espacio_asignado;
+
+            // Actualizar la tarjeta de asignado
+            actualizarTarjetaAsignados(espacioAsignado);
+
+            // Después de un tiempo (por ejemplo, 10 segundos), reiniciar la tarjeta a '--'
+            setTimeout(() => {
+                reiniciarTarjetaAsignados();
+            }, 10000);
         } else {
             document.querySelector("#mensajeResultado").innerText = 
                 "Error al registrar: " + (data.message || 'Error desconocido');
@@ -216,9 +271,16 @@ function mostrarMensaje(mensaje, esExitoso) {
     }, 5000);
 }
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarTarjetasEspacios();
+    setInterval(actualizarTarjetasEspacios, 4000);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Iniciando actualización de tabla");
     actualizarTabla();
-    // Actualizar cada 30 segundos
-    setInterval(actualizarTabla, 6000);
+
+    setInterval(actualizarTabla, 4000);
 });

@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 //
+require_once 'config/auth.php';
 require_once 'controllers/controller_historial.php';
 require_once 'controllers/controller_entradasVivo.php';
 
@@ -18,20 +19,25 @@ switch ($route) {
         include('views/login.php');
         break;
     case 'dashboard':
+        requireAuth();
         $historial = mostrarHistoryVivo();
         include('views/dashboard.php');
         break;
     case 'historial-usuarios':
+        requireAuth();
         include('views/historial-usuarios.php');
         break;
     case 'historial':
+        requireAuth();
         $historial = mostrarHiatoria();
         include('views/historial.php');
         break;
     case 'vigilantes':
+        requireAuth();
         include('views/registroVigilantes.php');
         break;
     case 'añadirDueño':
+        requireAuth();
         include('views/formDuenos.php');
         break;
     default:

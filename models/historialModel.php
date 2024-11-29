@@ -11,7 +11,7 @@ function getHistory($db) {
     d.cedula,
     ep.numero_espacio,
     ep.tipo_espacio,
-    ep.estado 
+    ep.estado   
     FROM registroacceso ra
     INNER JOIN Dueno_vehiculos dv ON ra.id_duenos_vehiculos = dv.id_duenos_vehiculos
     INNER JOIN vehiculo v ON dv.id_vehiculo = v.id_vehiculo

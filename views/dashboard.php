@@ -1,9 +1,3 @@
-  <?php
-  session_start();
-  if (empty($_SESSION["id_usuario"])){
-    header("location: login");
-  }
-  ?>
   <?php include 'components/header.php'; ?>
     <div class="grid m-0">
       <div class="row height-100 m-0">
@@ -22,19 +16,19 @@
               <div class="card content width-card text-bg-warning mb-3" style="max-width: 18rem;">
                 <div class="card-header">Asignado <i class=" i-movil"></i></div>
                 <div class="card-body">
-                  <h5 class="card-title coolor">10</h5>
+                  <h5 class="card-title coolor" >--</h5>
                 </div>
               </div>
               <div class="card content width-card mb-3" style="max-width: 18rem;">
                 <div class="card-header color">Espacios disponibles <i class="bi bi-car-front i-movil"></i></div>
                 <div class="card-body">
-                  <h5 class="card-title color">04</h5>
+                  <h5 class="card-title color" >04</h5>
                 </div>
               </div>
               <div class="card content width-card mb-3" style="max-width: 18rem;">
                 <div class="card-header color">Espacios disponibles <i class="bi bi-bicycle i-movil"></i></div>
                 <div class="card-body">
-                  <h5 class="card-title color">05</h5>
+                  <h5 class="card-title color" >05</h5>
                 </div>
               </div>
             </div>

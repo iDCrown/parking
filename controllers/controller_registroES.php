@@ -26,9 +26,15 @@ try {
 
     // Verificar si es una entrada o salida
     if (isset($data['tipo']) && $data['tipo'] === 'salida') {
+        // Si es salida, registrar la salida
         $resultado = registrarSalida($db, $data['placa'], $data['tipoVehiculo']);
     } else {
+        // Si es entrada, registrar la entrada
         $resultado = registrarEntrada($db, $data['cedula'], $data['placa'], $data['tipoVehiculo']);
+        
+        // Como la función registrarEntrada ya usa asignarEspacio y devuelve el id_espacio 
+        // en el caso de éxito, podemos obtenerlo directamente de $resultado
+        $resultado['espacio_asignado'] = $resultado['success'] ? $resultado['id_espacio'] : null;
     }
 
     echo json_encode($resultado);
