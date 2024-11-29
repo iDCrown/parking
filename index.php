@@ -13,19 +13,19 @@ include('./config/config.php');
 $route = isset($_GET['route']) ? $_GET['route'] : 'login';
 
 // Redirigir según la ruta
-switch ($route) {
+switch ($route) {   
     case 'login':
         include('views/login.php');
         break;
     case 'dashboard':
-        mostrarHistoryVivo();
+        $historial = mostrarHistoryVivo();
         include('views/dashboard.php');
         break;
     case 'historial-usuarios':
         include('views/historial-usuarios.php');
         break;
     case 'historial':
-        mostrarHiatoria();
+        $historial = mostrarHiatoria();
         include('views/historial.php');
         break;
     case 'vigilantes':

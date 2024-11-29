@@ -6,14 +6,14 @@ error_reporting(E_ALL);
 require_once '../db/db.php';
 
 // Modificamos la función para que maneje más casos
-function registrarEntrada($db, $nombre, $placa, $tipoVehiculo){
+function registrarEntrada($db, $cedula, $placa, $tipoVehiculo){
   // Primero, verificamos si el vehículo y el dueño existen
   $query_verificacionEntrada = "SELECT
   dv.id_duenos_vehiculos, d.id_dueno, v.id_vehiculo
   FROM Dueno_vehiculos dv
   INNER JOIN vehiculo v ON dv.id_vehiculo = v.id_vehiculo
   INNER JOIN Duenos d ON dv.id_dueno = d.id_dueno
-  WHERE v.placa = ? AND d.nombre = ?";
+  WHERE v.placa = ? AND d.cedula = ?";
 
   $stmt_verificacion = $db->prepare($query_verificacionEntrada);
   if($stmt_verificacion === false) {
@@ -21,10 +21,9 @@ function registrarEntrada($db, $nombre, $placa, $tipoVehiculo){
     return ['success' => false, 'message' => 'Error en la consulta inicial'];
   }
   
-  $stmt_verificacion->bind_param("ss", $placa, $nombre);
+  $stmt_verificacion->bind_param("ss", $placa, $cedula);
   $stmt_verificacion->execute();
   $result = $stmt_verificacion->get_result();
-
   // Si el vehículo y dueño existen
   if($result->num_rows > 0){
     $row = $result->fetch_assoc();
@@ -124,24 +123,76 @@ function obtenerTipoEspacio($db, $id_espacio){
   
   //SALIDA
 
-function registrarSalida($db, $placa){
-  $horaSalida = date('Y-m-d H:i:s');
-  $query_update = "UPDATE registroacceso ra
-  INNER JOIN Dueno_vehiculos dv ON ra.id_duenos_vehiculos = dv.id_duenos_vehiculos
-  INNER JOIN vehiculo v ON dv.id_vehiculo = v.id_vehiculo
-  SET ra.horaSalida = ? WHERE v.placa = ? AND ra.horaSalida IS NULL";
-
-  $stmt = $db->prepare($query_update);
-  if ($stmt === false) {
-    // Si la preparación falla, muestra el error
-    throw new Exception('Error en la preparación de la consulta de salida: ' . $db->error);
+  function registrarSalida($db, $placa, $tipoVehiculo) {
+    // Verificar si el vehículo existe y coincide con el tipo
+    $query_verificacion = "SELECT 
+      v.id_vehiculo, 
+      v.placa, 
+      v.tipo AS tipo_vehiculo,
+      ra.id_registro AS id_registroacceso
+    FROM vehiculo v
+    LEFT JOIN Dueno_vehiculos dv ON v.id_vehiculo = dv.id_vehiculo
+    LEFT JOIN registroacceso ra ON dv.id_duenos_vehiculos = ra.id_duenos_vehiculos
+    WHERE v.placa = ? AND v.tipo = ? AND ra.horaSalida IS NULL";
+  
+    $stmt_verificacion = $db->prepare($query_verificacion);
+    if($stmt_verificacion === false) {
+      error_log('Error en la preparación de la consulta: ' . $db->error);
+      return ['success' => false, 'message' => 'Error en la verificación inicial'];
+    }
+    
+    $stmt_verificacion->bind_param("ss", $placa, $tipoVehiculo);
+    $stmt_verificacion->execute();
+    $result = $stmt_verificacion->get_result();
+  
+    // Si no se encuentra el vehículo o no coincide el tipo
+    if($result->num_rows === 0) {
+      // Verificar si la placa existe pero no coincide el tipo
+      $query_placa_existe = "SELECT tipo_vehiculo FROM vehiculo WHERE placa = ?";
+      $stmt_placa = $db->prepare($query_placa_existe);
+      $stmt_placa->bind_param("s", $placa);
+      $stmt_placa->execute();
+      $result_placa = $stmt_placa->get_result();
+  
+      if ($result_placa->num_rows > 0) {
+        $row_placa = $result_placa->fetch_assoc();
+        return [
+          'success' => false, 
+          'message' => "La placa {$placa} corresponde a un {$row_placa['tipo_vehiculo']}, no a un {$tipoVehiculo}"
+        ];
+      }
+  
+      return ['success' => false, 'message' => 'No hay registro de entrada para este vehículo'];
+    }
+  
+    // Registrar la salida
+    $horaSalida = date('Y-m-d H:i:s');
+    $row = $result->fetch_assoc();
+  
+    // Actualizar hora de salida
+    $query_update = "UPDATE registroacceso SET horaSalida = ? WHERE id_registro = ?";
+    $stmt_salida = $db->prepare($query_update);
+    if ($stmt_salida === false) {
+      error_log('Error en la preparación de la consulta de salida: ' . $db->error);
+      return ['success' => false, 'message' => 'Error al registrar la salida'];
+    }
+  
+    $stmt_salida->bind_param("si", $horaSalida, $row['id_registroacceso']);
+    if (!$stmt_salida->execute()) {
+      return ['success' => false, 'message' => 'Error al actualizar la salida'];
+    }
+  
+    // Liberar el espacio de parqueo
+    $query_liberar_espacio = "UPDATE espacioparqueadero ep
+      JOIN registroacceso ra ON ep.id_espacio = ra.id_espacio
+      SET ep.estado = 'Disponible'
+      WHERE ra.id_registro = ?";
+    $stmt_liberar = $db->prepare($query_liberar_espacio);
+    $stmt_liberar->bind_param("i", $row['id_registroacceso']);
+    $stmt_liberar->execute();
+  
+    return [
+      'success' => true, 
+      'message' => 'Salida registrada correctamente'
+    ];
   }
-  $stmt->bind_param("ss",$horaSalida, $placa);
-  $stmt->execute();
-  return $stmt->affected_rows > 0;  // Retorna true si se actualizó correctamente
-
-}
-// Al final del archivo registroModel.php
-header('Content-Type: application/json');  // Asegura que la respuesta sea JSON
-echo json_encode(['success' => true]);  // Enviar una respuesta exitosa
-?>

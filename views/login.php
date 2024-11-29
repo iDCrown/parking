@@ -1,3 +1,14 @@
+<?php
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+ini_set('display_errors', 1);
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+if (!empty($_SESSION["id_usuario"])) {
+    header("location: dashboard"); // Cambia "dashboard" por la página principal.
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

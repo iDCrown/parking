@@ -5,6 +5,8 @@
     function mostrarHistoryVivo() {
         $db = conexionDB();
         $historial = getHistoryVivo($db);
-        include(__DIR__ . '/../views/dashboard.php');
-    }
+        mysqli_close($db);
+        return $historial;
+        /* include(__DIR__ . '/../views/dashboard.php'); */
+    }   
 ?>

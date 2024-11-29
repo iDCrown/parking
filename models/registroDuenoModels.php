@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php';
+require_once '../db/db.php';
 
 function insertarDueno($nombre, $apellido, $cedula, $rol_dueno) {
     $conexion = conexionDB();

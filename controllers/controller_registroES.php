@@ -10,30 +10,37 @@ error_reporting(0);
 header('Content-Type: application/json'); 
 
 // Incluir archivos necesarios
-require_once '../models/registroModel.php';
+try {
+    require_once '../models/registroModel.php';
 
-// Recibir datos JSON
-$json = file_get_contents('php://input');
-$data = json_decode($json, true);
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
 
-// Validar datos recibidos
-if (!$data) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Datos inválidos']);
+    if (!$data) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Datos inválidos']);
+        exit;
+    }
+
+    $db = conexionDB();
+
+    // Verificar si es una entrada o salida
+    if (isset($data['tipo']) && $data['tipo'] === 'salida') {
+        $resultado = registrarSalida($db, $data['placa'], $data['tipoVehiculo']);
+    } else {
+        $resultado = registrarEntrada($db, $data['cedula'], $data['placa'], $data['tipoVehiculo']);
+    }
+
+    echo json_encode($resultado);
+    exit;
+
+} catch (Exception $e) {
+    // Capturar cualquier error y devolverlo como JSON
+    http_response_code(500);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Error en el servidor: ' . $e->getMessage()
+    ]);
     exit;
 }
-
-// Obtener conexión a la base de datos
-$db = conexionDB();
-
-// Llamar a la función de registro
-$resultado = registrarEntrada($db, $data['nombre'], $data['placa'], $data['tipoVehiculo']);
-
-// Enviar respuesta JSON
-ob_end_clean();
-
-// Enviar respuesta JSON
-echo json_encode($resultado);
-
-exit;
 ?>

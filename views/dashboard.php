@@ -89,30 +89,35 @@ if (empty($_SESSION["id_usuario"])){
             <form class="form-access first" id="formRegistro" onsubmit="registrarVehiculo(event)" >
               <h5>Ingresa la placa del vehiculo</h5>
               <input id="inputPlaca" class="nosubmit " type="search" placeholder="Placa...">
-              <input id="inputNombre" class="nosubmit " type="search" placeholder="Nombre...">
+              <input id="inputCedula" class="nosubmit " type="search" placeholder="Cedula...">
               <button class="btn summit btn-warning btn-md">Registrar</button>
             </form>
           </div>
         <div>
+          <div class="">
+          <div id="mensajeResultadoS"></div>
+          </div>
+        
         <div class="card-form width-card">
             <div class="card-header-form color">
               <form action="">
                 <input type="date">
               </form>
               <div>
-                <button class="icon-btn">
+                <button onclick="seleccionarTipoS('Moto')" class="icon-btn">
                   <i class="bi bi-bicycle i-btn"></i>
                 </button>
-                <button class="icon-btn">
+                <button onclick="seleccionarTipoS('Auto')" class="icon-btn">
                   <i class="bi bi-car-front i-btn"></i>
                 </button>
               </div>
-            </div>
-            <form class="form-access" action="">
-              <h5>Salida del vehiculo</h5>
-              <input class="nosubmit" type="search" placeholder="Placa...">
-              <button class="btn summit btn-warning btn-md">Registrar</button>
-            </form>
+              </div>
+                <form class="form-access" id="formSalida" onsubmit="registrarSalida(event)">
+                  <h5>Salida del vehiculo</h5>
+                  <input id="inputPlacaSalida" class="nosubmit" type="search" placeholder="Placa...">
+                  <button class="btn summit btn-warning btn-md">Registrar</button>
+                </form>
+              <div id="mensajeResultado"></div>
           </div>
         <div>
         </div>

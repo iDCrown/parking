@@ -5,6 +5,8 @@
     function mostrarHiatoria() {
         $db = conexionDB();
         $historial = getHistory($db);
-        include(__DIR__ . '/../views/historial.php');
+        mysqli_close($db);
+        return $historial;
+        /* include(__DIR__ . '/../views/historial.php'); */
     }
 ?>
