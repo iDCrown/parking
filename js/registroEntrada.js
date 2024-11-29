@@ -1,4 +1,27 @@
 //BOTONES TIPO VEHICULO
+function selectButton(mostrar) {
+    const button = document.querySelectorAll('.icon-btn');
+    const icon = document.querySelectorAll('.i-btn');
+
+    console.log(mostrar)
+    if(!mostrar){
+        button.forEach(button => button.classList.remove('icon-btn-active'));
+        icon.forEach(icon => icon.classList.remove('i-btn-active'));
+    }else{
+        button.forEach((t, index) => {
+            t.addEventListener('click', function() {
+                // Eliminar las clases activas de todos los botones e íconos
+                button.forEach(btn => btn.classList.remove('icon-btn-active'));
+                icon.forEach(icn => icn.classList.remove('i-btn-active'));
+        
+                // Agregar la clase activa solo al botón e ícono seleccionados
+                t.classList.add('icon-btn-active');
+                icon[index].classList.add('i-btn-active');
+            });
+        });
+    }
+}
+
 let tipoVehiculoSeleccionado = null;
 
 function seleccionarTipo(tipo){
@@ -10,6 +33,70 @@ function seleccionarTipoS(tipo){
     tipoVehiculoSeleccionado = tipo;
     document.querySelector("#mensajeResultadoS").innerText = `Seleccionaste: ${tipo}`;
 }
+
+function actualizarTabla() {
+
+    selectButton(true)
+    fetch('controllers/controller_entradasVivo.php?action=getHistoryVivo')
+    .then(response => {
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
+        // Verifica el tipo de contenido
+        const contentType = response.headers.get('content-type');
+        console.log('Content-Type:', contentType);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        console.log('Datos recibidos:', data);
+        
+        const tbody = document.querySelector('.table-content tbody');
+        tbody.innerHTML = ''; // Limpiar tabla actual
+
+        data.forEach(registro => {
+            const tr = document.createElement('tr');
+            tr.classList.add("item");
+            tr.innerHTML = `
+                <td>${registro.numero_espacio}</td>
+                <td>${registro.tipo_espacio}</td>
+                <td>${registro.nombre} ${registro.apellido}</td>
+                <td>${registro.placa}</td>
+                <td>${registro.horaEntrada}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    })
+    .catch(error => {
+        console.error('Error completo:', error);
+        console.error('Tipo de error:', typeof error);
+        console.error('Mensaje de error:', error.message);
+    });
+    
+}
+// Función para evitar XSS al escapar caracteres especiales
+function escapeHtml(str) {
+    // Verifica si str es un valor válido antes de usar replace
+    if (str === null || str === undefined) {
+        return '';
+    }
+    
+    return String(str).replace(/[&<>"']/g, (match) => {
+        const escapeMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;',
+        };
+        return escapeMap[match];
+    });
+}
+
 
 function registrarVehiculo(event) {
     event.preventDefault(); 
@@ -79,7 +166,8 @@ function registrarVehiculo(event) {
         console.error("Error detallado:", error);
         document.querySelector("#mensajeResultado").innerText = 
             "Error de conexión: " + error.message;
-    });
+    })
+    .finally(() => selectButton(false));
 }
 
 function registrarSalida(event) {
@@ -139,7 +227,7 @@ function registrarSalida(event) {
     .catch(error => {
         console.error('Fetch Error:', error);
         mostrarMensaje('Error al registrar la salida', false);
-    });
+    })
 }
 
 function mostrarMensaje(mensaje, esExitoso) {
@@ -155,3 +243,10 @@ function mostrarMensaje(mensaje, esExitoso) {
         mensajeDiv.className = '';
     }, 5000);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Iniciando actualización de tabla");
+    actualizarTabla();
+    // Actualizar cada 30 segundos
+    setInterval(actualizarTabla, 6000);
+});

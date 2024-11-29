@@ -16,7 +16,24 @@
     padding: 0;
   } 
 }
-
+.item{
+  display: revert;
+}
+.alerta { 
+  padding: 15px;
+  background-color: #ffbb0054;
+  color: #ffb900;
+  position: absolute;
+  margin: 3px 0px;
+  top: 0;
+  right: 7px;
+  width: 21em;
+  z-index: 1000;
+  border-radius: 1em;
+} 
+.alerta-oculta {
+   display: none; 
+  }
 .panel{
   width: 31em;
   padding: 3em 0 0 0;
@@ -312,7 +329,7 @@ input[type="date"] {
   box-shadow: inset 5px 5px 4px #e4e4ed,
               inset -5px -5px 4px #ffffff;
 }
-.icon-btn:active{
+.icon-btn-active{
   border-radius: 150px;
   background: #f5f5ff;
   box-shadow: inset 5px 5px 4px #e4e4ed,
@@ -325,7 +342,7 @@ input[type="date"] {
 .icon-btn .i-btn:hover{
   color: #ffc107;
 }
-.i-btn:active{
+.i-btn-active{
   color: #ffc107;
 }
 .menu{

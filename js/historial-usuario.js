@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
     selectTab('dueno'); 
 
@@ -103,6 +105,7 @@ function actualizarTabla(datos) {
 
     datos.forEach(registro => {
         const row = document.createElement("tr");
+        row.classList.add("item");
 
         Object.keys(registro).forEach(clave => {
             const cell = document.createElement("td");
