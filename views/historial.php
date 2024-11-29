@@ -7,7 +7,7 @@
         <div class="history">
           <h1>Historias de Entradas y Salidas</h1>
           <?php include 'components/filter.php' ?>
-          <table class=" table table-light table-hover">
+          <table class="table-history table table-hover">
             <thead>
               <tr>
                 <th scope="col">N. Espacio</th>

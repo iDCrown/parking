@@ -41,7 +41,7 @@ if (empty($_SESSION["id_usuario"])){
           <div class="table-visit">
             <?php include 'components/filter.php'?>
             <div class="table-content">
-            <table class=" table table-light table-hover">
+            <table style="text-align: center;" class=" table table-light table-hover">
               <thead>
                 <tr>
                   <th scope="col">N. Espacio</th>
