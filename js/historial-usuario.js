@@ -1,41 +1,57 @@
 document.addEventListener('DOMContentLoaded', function() {
-     selectTab('dueno'); 
-     
-     const tabs = document.querySelectorAll(".tab");
-     tabs.forEach(tab =>{
-         tab.addEventListener('click', function(){
-             tabs.forEach(t => 
-             t.classList.remove('active-tab'));
-             tab.classList.add('active-tab');
-            })
-        })
+    selectTab('dueno'); 
+
+    const selectButton = document.getElementById('buttonAdd');
+    const tt = document.getElementById('buttonAddV');
+    const tabs = document.querySelectorAll(".tab");
+
+    console.log(selectButton); // Verifica que selectButton esté correctamente seleccionado
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            tabs.forEach(t => t.classList.remove('active-tab'));
+            tab.classList.add('active-tab');
+
+            if (tab.id === "tab1") {
+                selectButton.style.display = "block";
+                tt.style.display = "none";
+            } else if (tab.id === "tab2") {
+                selectButton.style.display = "none";
+                tt.style.display = "block";
+            } else {
+                selectButton.style.display = "none";
+                tt.style.display = "none";
+            }
+        });
     });
+});
+
+
     
-    function actualizasEncabezado(tipoUsuario){
-        const thead = document.querySelector('#tabla-head');       
-        thead.innerHTML = "";
+function actualizasEncabezado(Usuario){
+    const thead = document.querySelector('#tabla-head');       
+    thead.innerHTML = "";
 
-        const filaHead = document.createElement('tr');
-        const headDueno = ['Nombre', 'Apellido', 'Cédula', 'Correo', 'Rol'];
-        const headUsuario = ['Nombre', 'Apellido', 'Cédula', 'Celular', 'Correo'];
-        
-        let encabezado;
-        if(tipoUsuario === 'dueno'){
-            encabezado = headDueno;
-        }else {
-            encabezado = headUsuario;
-        }
-
-        encabezado.forEach(text => {
-            const th = document.createElement('th');
-            th.textContent = text;
-            filaHead.appendChild(th);  
-        })
-        thead.appendChild(filaHead);
+    const filaHead = document.createElement('tr');
+    const headDueno = ['Vehiculo', 'placa', 'Nombre', 'Apellido', 'Cédula', 'Correo', 'Rol'];
+    const headUsuario = ['Nombre', 'Apellido', 'Cédula', 'Celular', 'Correo'];
+    
+    let encabezado;
+    if(Usuario === 'dueno'){
+        encabezado = headDueno;
+    }else {
+        encabezado = headUsuario;
     }
-    
 
-    function selectTab(tipo_usuario) {
+    encabezado.forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        filaHead.appendChild(th);  
+    })
+    thead.appendChild(filaHead);
+}
+
+function selectTab(tipo_usuario) {
         
     actualizasEncabezado(tipo_usuario)
     mostrarSinner(true);
@@ -68,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error("Error en la solicitud:", error))
         .finally(() => mostrarSinner(false));
 }
-
 
 function actualizarTabla(datos) {
 

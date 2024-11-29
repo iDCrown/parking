@@ -10,21 +10,25 @@
       <div class="col-lg-9 custom-col-9 users-sec bg-gray">
         <div class="d-md-flex justify-content-md-between">
           <h1>Usuarios en el sistema</h1>
-          <button id="buttonAdd" class="btn btn-warning btn-add text-light" type="button"
-            onclick="window.location.href='añadirDueño'"><i class="bi bi-plus"></i>Añadir Dueño</button>
-          <button id="buttonAdd" class="btn btn-warning btn-add text-light" type="button"
-          onclick="window.location.href='añadirDueño'"><i class="bi bi-plus"></i>Añadir Vigilante</button>
+          <button id="buttonAdd" class="btn btn-warning btn-add text-light" style="display: block;" type="button"
+              onclick="window.location.href='añadirDueño'">
+              <i class="bi bi-plus"></i>Añadir Dueño
+            </button>
+          <button id="buttonAddV" class="btn btn-warning btn-add text-light" style="display: none;" type="button"
+            onclick="window.location.href='añadirVigilante'">
+            <i class="bi bi-plus"></i>Añadir Vigilante
+          </button>
         </div>
         <div class="container container-users d-flex justify-content-between">
           <ul class="nav nav-underline">
             <li class="nav-item">
-              <a class="tab active-tab nav-link nav-link-text" onclick="selectTab('dueno')" aria-current="page" >Dueños</a>
+              <a  id="tab1" class="tab active-tab nav-link nav-link-text" onclick="selectTab('dueno')" aria-current="page" >Dueños</a>
             </li>
             <li class="nav-item">
-              <a class="tab nav-link nav-link-text" onclick="selectTab('vigilante')" >Vigilantes</a>
+              <a id="tab2" class="tab nav-link nav-link-text" onclick="selectTab('vigilante')" >Vigilantes</a>
             </li>
             <li class="nav-item">
-              <a class="tab nav-link nav-link-text" onclick="selectTab('administrador')" >Administradores</a>
+              <a id="tab3" class="tab nav-link nav-link-text" onclick="selectTab('administrador')" >Administradores</a>
             </li>
           </ul>
           <form class="nosubmit">

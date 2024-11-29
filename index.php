@@ -34,6 +34,9 @@ switch ($route) {
     case 'añadirDueño':
         include('views/formDuenos.php');
         break;
+    case 'añadirVigilante':
+        include('views/formVigilantes.php');
+        break;
     default:
         echo "Página no encontrada";
         break;

@@ -10,7 +10,7 @@
                 <div class="container position-absolute login_div d-flex flex-column align-items-center justify-content-center" style="width: 47em; padding-left:0; height:87vh">
                     <div>
 
-                    <h1>Dueño de Vehiculo</h1>
+                    <h1>Nuevo Dueño de Vehiculo</h1>
                     </div>
                     <form method="post" action="controllers/registroDuenoController.php" class="d-flex flex-column align-items-center">        
                     <section class="d-flex">

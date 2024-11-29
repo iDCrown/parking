@@ -25,12 +25,19 @@ function mostrarUsuario($db, $tipo_usuario) {
 
 function mostrarDueno($db) {
     $query_dueno = "SELECT 
-        nombre AS nombre_dueno,
-        apellido AS apellido_dueno,
-        cedula AS cedula_dueno,
-        lower(correo) AS correo_dueno,
-        Rol_dueno
-        FROM Duenos";
+    v.tipo AS tipo_vehiculo, 
+    v.placa, 
+    d.nombre, 
+    d.apellido, 
+    d.cedula, 
+    d.correo 
+    AS correo_dueno, 
+    d.Rol_dueno 
+    FROM Dueno_vehiculos dv 
+    INNER JOIN Duenos d ON dv.id_dueno = d.id_dueno 
+    INNER JOIN vehiculo v ON dv.id_vehiculo = v.id_vehiculo 
+    GROUP BY d.nombre, d.apellido, d.cedula, d.correo, d.Rol_dueno";
+        
 
     $stmt = $db->prepare($query_dueno);
     if ($stmt === false) {
